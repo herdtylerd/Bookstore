@@ -1,4 +1,5 @@
 ﻿using Bookstore.Models;
+using Bookstore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,20 +13,34 @@ namespace Bookstore.Controllers
     public class HomeController : Controller
     {
 
-        private BookstoreContext BContext { get; set; }
+        private IBookstoreRepository repo;
 
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, BookstoreContext blah)
+        public HomeController(IBookstoreRepository temp)
         {
-            BContext = blah;
+            repo = temp;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pageNum = 1)
         {
-            var books = BContext.Books.ToList();
+            int pageSize = 5;
 
-            return View(books);
+            var x = new BooksViewModel
+            {
+                Books = repo.Books
+                .OrderBy(b => b.Title)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumBooks = repo.Books.Count(),
+                    BooksPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
         }
     }
 }
