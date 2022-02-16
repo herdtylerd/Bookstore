@@ -4,39 +4,31 @@
 
 @model BooksViewModel
 
-<div class="text-center">
-    <div class="container">
-        <h1>Books:</h1>
+<div class="container">
+    <h1>Books:</h1>
+    @foreach (var book in Model.Books)
+    {
+        <div class="card card-outline-primary m-1 p-1">
+            <div class="bg-faded p-1">
+                <h3>@book.Title</h3>
+                <p>
+                    <b>Author:</b> @book.Author<br />
+                    <b>Publisher:</b> @book.Publisher<br />
+                    <b>ISBN:</b> @book.Isbn<br />
+                    <b>Classification:</b> @book.Classification<br />
+                    <b>Pages:</b> @book.PageCount<br />
 
-        <table class="table table-bordered table-striped">
-            <thead class="font-weight-bold">
-                <tr>
-                    <td>Title</td>
-                    <td>Author</td>
-                    <td>Publisher</td>
-                    <td>ISBN</td>
-                    <td>Classification/Category</td>
-                    <td>Number of Pages</td>
-                    <td>Price</td>
-                </tr>
-            </thead>
+                    <span class="badge badge-pill badge-primary" style="float:right">
+                        <large>$@book.Price</large>
+                    </span>
+                </p>
+            </div>
+        </div>
 
-            <tbody>
-                @foreach (var book in Model.Books)
-                {
-                    <tr>
-                        <td>@book.Title</td>
-                        <td>@book.Author</td>
-                        <td>@book.Publisher</td>
-                        <td>@book.Isbn</td>
-                        <td>@book.Classification</td>
-                        <td>@book.PageCount</td>
-                        <td>$@book.Price</td>
-                    </tr>
-                }                    
-            </tbody>
-        </table>
-        <div page-nums="@Model.PageInfo" page-action="Index"></div>
-    </div>
-    
+       
+    }
 </div>
+
+<div page-nums="@Model.PageInfo" page-action="Index" page-classes-enabled="true" page-class="btn"
+     page-class-normal="btn-outline-dark" page-class-selected="btn-primary"
+     class="btn-group pull-right m-1"></div>
