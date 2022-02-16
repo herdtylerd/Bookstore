@@ -11,16 +11,21 @@ namespace Bookstore.Controllers
 {
     public class HomeController : Controller
     {
+
+        private BookstoreContext BContext { get; set; }
+
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BookstoreContext blah)
         {
-            _logger = logger;
+            BContext = blah;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var books = BContext.Books.ToList();
+
+            return View(books);
         }
     }
 }

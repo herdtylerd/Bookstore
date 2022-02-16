@@ -2,7 +2,41 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model List<Book>
+
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="container">
+        <h1>Books:</h1>
+
+        <table class="table table-bordered table-striped">
+            <thead class="font-weight-bold">
+                <tr>
+                    <td>Title</td>
+                    <td>Author</td>
+                    <td>Publisher</td>
+                    <td>ISBN</td>
+                    <td>Classification/Category</td>
+                    <td>Number of Pages</td>
+                    <td>Price</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var book in Model)
+                {
+                    <tr>
+                        <td>@book.Title</td>
+                        <td>@book.Author</td>
+                        <td>@book.Publisher</td>
+                        <td>@book.Isbn</td>
+                        <td>@book.Classification</td>
+                        <td>@book.PageCount</td>
+                        <td>$@book.Price</td>
+                    </tr>
+                }                    
+            </tbody>
+        </table>
+
+    </div>
+    
 </div>
