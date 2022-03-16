@@ -14,6 +14,19 @@
         <div class="container-fluid">
             <div class="row">
                 <span class="col navbar-brand">BOOKSTORE</span>
+
+                <div class="col dropdown">
+                    <button class="btn btn-secondary dropdown-toggle"
+                            type="button" id="dropdownMenu1" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <a class="dropdown-item" href="/">Home</a>
+                        <a class="dropdown-item" href="/Admin">Admin</a>
+                    </div>
+                </div>
+
                 <div class="col-6 text-right">
                     <vc:cart-summary></vc:cart-summary>
                 </div>
